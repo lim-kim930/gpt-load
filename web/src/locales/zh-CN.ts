@@ -230,6 +230,7 @@ export default {
     channelType: "渠道类型",
     sortOrder: "排序",
     testModel: "测试模型",
+    testMessage: "测试消息",
     testPath: "测试路径",
     hideKeys: "隐藏密钥",
     showKeys: "显示密钥",
@@ -310,6 +311,8 @@ export default {
     sortValue: "排序值",
     testModelTooltip:
       "用于验证API密钥有效性的模型名称。系统会使用这个模型发送测试请求来检查密钥是否可用，请尽量使用轻量快速的模型",
+    testMessageTooltip:
+      "验证密钥时发送给上游的消息内容，留空时默认使用 \"hi\"。若上游有内容审核或对极简消息返回异常，可改成其他简短文本",
     testPathTooltip1: "自定义用于验证密钥的API端点路径。如果不填写，将使用默认路径",
     testPathTooltip2: "如需使用非标准路径，请在此填写完整的API路径",
     optionalCustomValidationPath: "可选，自定义用于验证key的API路径",

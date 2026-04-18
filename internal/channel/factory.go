@@ -146,6 +146,7 @@ func (f *Factory) newBaseChannel(name string, group *models.Group) (*BaseChannel
 		HTTPClient:          httpClient,
 		StreamClient:        streamClient,
 		TestModel:           group.TestModel,
+		TestMessage:         group.TestMessage,
 		ValidationEndpoint:  utils.GetValidationEndpoint(group),
 		channelType:         group.ChannelType,
 		groupUpstreams:      group.Upstreams,

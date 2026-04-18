@@ -234,6 +234,7 @@ export default {
     channelType: "Channel Type",
     sortOrder: "Sort Order",
     testModel: "Test Model",
+    testMessage: "Test Message",
     testPath: "Test Path",
     hideKeys: "Hide Keys",
     showKeys: "Show Keys",
@@ -315,6 +316,8 @@ export default {
     sortValue: "Sort value",
     testModelTooltip:
       "Model name for validating API key availability. System will use this model to send test requests to check if the key is working. Please use lightweight and fast models",
+    testMessageTooltip:
+      "Content sent to upstream when validating a key. Defaults to \"hi\" if left blank. Change it if the upstream has moderation that rejects minimal messages",
     testPathTooltip1:
       "Custom API endpoint path for key validation. Default path will be used if not specified",
     testPathTooltip2: "If using non-standard path, please enter complete API path here",

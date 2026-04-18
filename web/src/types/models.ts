@@ -69,6 +69,7 @@ export interface Group {
   description: string;
   sort: number;
   test_model: string;
+  test_message?: string;
   channel_type: ChannelType;
   upstreams: UpstreamInfo[];
   validation_endpoint: string;

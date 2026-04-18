@@ -115,7 +115,7 @@ func (ch *GeminiChannel) ValidateKey(ctx context.Context, apiKey *models.APIKey,
 			{
 				"role": "user",
 				"parts": []gin.H{
-					{"text": "hi"},
+					{"text": ch.ProbeMessage()},
 				},
 			},
 		},

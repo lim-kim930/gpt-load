@@ -92,6 +92,7 @@ type Group struct {
 	ChannelType         string               `gorm:"type:varchar(50);not null" json:"channel_type"`
 	Sort                int                  `gorm:"default:0" json:"sort"`
 	TestModel           string               `gorm:"type:varchar(255);not null" json:"test_model"`
+	TestMessage         string               `gorm:"type:varchar(1024);default:''" json:"test_message"`
 	ParamOverrides      datatypes.JSONMap    `gorm:"type:json" json:"param_overrides"`
 	Config              datatypes.JSONMap    `gorm:"type:json" json:"config"`
 	HeaderRules         datatypes.JSON       `gorm:"type:json" json:"header_rules"`

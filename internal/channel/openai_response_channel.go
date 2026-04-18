@@ -88,7 +88,7 @@ func (ch *OpenAIResponseChannel) ValidateKey(ctx context.Context, apiKey *models
 
 	payload := gin.H{
 		"model": ch.TestModel,
-		"input": "hi",
+		"input": ch.ProbeMessage(),
 	}
 	body, err := json.Marshal(payload)
 	if err != nil {

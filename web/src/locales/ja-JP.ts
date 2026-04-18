@@ -233,6 +233,7 @@ export default {
     channelType: "チャンネルタイプ",
     sortOrder: "並び順",
     testModel: "テストモデル",
+    testMessage: "テストメッセージ",
     testPath: "テストパス",
     hideKeys: "キーを非表示",
     showKeys: "キーを表示",
@@ -314,6 +315,8 @@ export default {
     sortValue: "ソート値",
     testModelTooltip:
       "APIキーの有効性を検証するためのモデル名。システムはこのモデルを使用してテストリクエストを送信し、キーが機能しているか確認します。軽量で高速なモデルを使用してください",
+    testMessageTooltip:
+      "キー検証時に上流へ送信するメッセージ内容。空欄の場合は \"hi\" が使用されます。上流のモデレーションで極端に短いメッセージが拒否される場合は変更してください",
     testPathTooltip1:
       "キー検証用のカスタムAPIエンドポイントパス。指定しない場合はデフォルトパスが使用されます",
     testPathTooltip2: "非標準パスを使用する場合は、完全なAPIパスをここに入力してください",

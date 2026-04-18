@@ -31,6 +31,7 @@ type BaseChannel struct {
 	HTTPClient         *http.Client
 	StreamClient       *http.Client
 	TestModel          string
+	TestMessage        string
 	ValidationEndpoint string
 	upstreamLock       sync.Mutex
 
@@ -102,6 +103,9 @@ func (b *BaseChannel) IsConfigStale(group *models.Group) bool {
 	if b.TestModel != group.TestModel {
 		return true
 	}
+	if b.TestMessage != group.TestMessage {
+		return true
+	}
 	if b.ValidationEndpoint != utils.GetValidationEndpoint(group) {
 		return true
 	}
@@ -124,6 +128,14 @@ func (b *BaseChannel) IsConfigStale(group *models.Group) bool {
 // GetHTTPClient returns the client for standard requests.
 func (b *BaseChannel) GetHTTPClient() *http.Client {
 	return b.HTTPClient
+}
+
+// ProbeMessage returns the configured key-validation probe text, falling back to "hi".
+func (b *BaseChannel) ProbeMessage() string {
+	if b.TestMessage != "" {
+		return b.TestMessage
+	}
+	return "hi"
 }
 
 // GetStreamClient returns the client for streaming requests.

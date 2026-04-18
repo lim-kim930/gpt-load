@@ -56,6 +56,7 @@ type GroupCreateRequest struct {
 	ChannelType         string              `json:"channel_type"`
 	Sort                int                 `json:"sort"`
 	TestModel           string              `json:"test_model"`
+	TestMessage         string              `json:"test_message"`
 	ValidationEndpoint  string              `json:"validation_endpoint"`
 	ParamOverrides      map[string]any      `json:"param_overrides"`
 	ModelRedirectRules  map[string]string   `json:"model_redirect_rules"`
@@ -82,6 +83,7 @@ func (s *Server) CreateGroup(c *gin.Context) {
 		ChannelType:         req.ChannelType,
 		Sort:                req.Sort,
 		TestModel:           req.TestModel,
+		TestMessage:         req.TestMessage,
 		ValidationEndpoint:  req.ValidationEndpoint,
 		ParamOverrides:      req.ParamOverrides,
 		ModelRedirectRules:  req.ModelRedirectRules,
@@ -125,6 +127,7 @@ type GroupUpdateRequest struct {
 	ChannelType         *string             `json:"channel_type,omitempty"`
 	Sort                *int                `json:"sort"`
 	TestModel           string              `json:"test_model"`
+	TestMessage         *string             `json:"test_message,omitempty"`
 	ValidationEndpoint  *string             `json:"validation_endpoint,omitempty"`
 	ParamOverrides      map[string]any      `json:"param_overrides"`
 	ModelRedirectRules  map[string]string   `json:"model_redirect_rules"`
@@ -204,6 +207,11 @@ func (s *Server) UpdateGroup(c *gin.Context) {
 		params.HasTestModel = true
 	}
 
+	if req.TestMessage != nil {
+		params.TestMessage = *req.TestMessage
+		params.HasTestMessage = true
+	}
+
 	if req.HeaderRules != nil {
 		rules := req.HeaderRules
 		params.HeaderRules = &rules
@@ -256,6 +264,7 @@ type GroupResponse struct {
 	ChannelType         string              `json:"channel_type"`
 	Sort                int                 `json:"sort"`
 	TestModel           string              `json:"test_model"`
+	TestMessage         string              `json:"test_message"`
 	ValidationEndpoint  string              `json:"validation_endpoint"`
 	ParamOverrides      datatypes.JSONMap   `json:"param_overrides"`
 	ModelRedirectRules  datatypes.JSONMap   `json:"model_redirect_rules"`
@@ -300,6 +309,7 @@ func (s *Server) newGroupResponse(group *models.Group) *GroupResponse {
 		ChannelType:         group.ChannelType,
 		Sort:                group.Sort,
 		TestModel:           group.TestModel,
+		TestMessage:         group.TestMessage,
 		ValidationEndpoint:  group.ValidationEndpoint,
 		ParamOverrides:      group.ParamOverrides,
 		ModelRedirectRules:  group.ModelRedirectRules,

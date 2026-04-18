@@ -42,7 +42,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            tbphp/gpt-load
+            limkim0309/gpt-load
             ghcr.io/${{ github.repository }}
           flavor: |
             latest=false

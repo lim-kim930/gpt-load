@@ -70,6 +70,7 @@ interface GroupFormData {
   channel_type: "anthropic" | "gemini" | "openai" | "openai-response";
   sort: number;
   test_model: string;
+  test_message: string;
   validation_endpoint: string;
   param_overrides: string;
   model_redirect_rules: string;
@@ -95,6 +96,7 @@ const formData = reactive<GroupFormData>({
   channel_type: "openai",
   sort: 1,
   test_model: "",
+  test_message: "",
   validation_endpoint: "",
   param_overrides: "",
   model_redirect_rules: "",
@@ -296,6 +298,7 @@ function resetForm() {
     channel_type: defaultChannelType,
     sort: 1,
     test_model: isCreateMode ? testModelPlaceholder.value : "",
+    test_message: "",
     validation_endpoint: "",
     param_overrides: "",
     model_redirect_rules: "",
@@ -338,6 +341,7 @@ function loadGroupData() {
     channel_type: props.group.channel_type || "openai",
     sort: props.group.sort || 1,
     test_model: props.group.test_model || "",
+    test_message: props.group.test_message || "",
     validation_endpoint: props.group.validation_endpoint || "",
     param_overrides: JSON.stringify(props.group.param_overrides || {}, null, 2),
     model_redirect_rules: JSON.stringify(props.group.model_redirect_rules || {}, null, 2),
@@ -526,6 +530,7 @@ async function handleSubmit() {
       channel_type: formData.channel_type,
       sort: formData.sort,
       test_model: formData.test_model,
+      test_message: formData.test_message,
       validation_endpoint: formData.validation_endpoint,
       param_overrides: paramOverrides,
       model_redirect_rules: modelRedirectRules,
@@ -726,6 +731,32 @@ async function handleSubmit() {
 
             <!-- When gemini channel, test path is hidden, need placeholder div to keep layout -->
             <div v-else class="form-item-half" />
+          </div>
+
+          <!-- Test message (probe content) -->
+          <div class="form-row">
+            <n-form-item
+              :label="t('keys.testMessage')"
+              path="test_message"
+              class="form-item-half"
+            >
+              <template #label>
+                <div class="form-label-with-tooltip">
+                  {{ t("keys.testMessage") }}
+                  <n-tooltip trigger="hover" placement="top">
+                    <template #trigger>
+                      <n-icon :component="HelpCircleOutline" class="help-icon" />
+                    </template>
+                    {{ t("keys.testMessageTooltip") }}
+                  </n-tooltip>
+                </div>
+              </template>
+              <n-input
+                v-model:value="formData.test_message"
+                placeholder="hi"
+              />
+            </n-form-item>
+            <div class="form-item-half" />
           </div>
 
           <!-- Proxy keys -->

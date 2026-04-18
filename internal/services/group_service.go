@@ -93,6 +93,7 @@ type GroupCreateParams struct {
 	ChannelType         string
 	Sort                int
 	TestModel           string
+	TestMessage         string
 	ValidationEndpoint  string
 	ParamOverrides      map[string]any
 	ModelRedirectRules  map[string]string
@@ -115,6 +116,8 @@ type GroupUpdateParams struct {
 	Sort                *int
 	TestModel           string
 	HasTestModel        bool
+	TestMessage         string
+	HasTestMessage      bool
 	ValidationEndpoint  *string
 	ParamOverrides      map[string]any
 	ModelRedirectRules  map[string]string
@@ -240,6 +243,7 @@ func (s *GroupService) CreateGroup(ctx context.Context, params GroupCreateParams
 		ChannelType:         channelType,
 		Sort:                params.Sort,
 		TestModel:           testModel,
+		TestMessage:         strings.TrimSpace(params.TestMessage),
 		ValidationEndpoint:  validationEndpoint,
 		ParamOverrides:      params.ParamOverrides,
 		ModelRedirectRules:  convertToJSONMap(params.ModelRedirectRules),
@@ -430,6 +434,10 @@ func (s *GroupService) UpdateGroup(ctx context.Context, id uint, params GroupUpd
 			return nil, NewI18nError(app_errors.ErrValidation, "validation.test_model_empty", nil)
 		}
 		group.TestModel = cleanedTestModel
+	}
+
+	if params.HasTestMessage {
+		group.TestMessage = strings.TrimSpace(params.TestMessage)
 	}
 
 	if params.ParamOverrides != nil {
